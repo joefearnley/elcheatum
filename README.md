@@ -1,1 +1,1 @@
-Repo for the static html site [elcheatum](http://elcheatum.com "El Cheatum")
+Repository for [elcheatum.com](http://elcheatum.com "El Cheatum") files.
