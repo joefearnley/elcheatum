@@ -1,1 +1,85 @@
-Test
+<!DOCTYPE html>
+<html lang="en" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="description" content="El Cheatum" />
+    <meta name="author" content="Joe Fearnley">
+    <title>El Cheatum!!</title>
+    <link href='http://fonts.googleapis.com/css?family=Covered+By+Your+Grace' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            background-color: #ddd;
+        }
+        h1 {
+            font-family: 'Covered By Your Grace', serif;
+            font-size: 56px;
+            font-style: normal;
+            font-weight: 400;
+            text-shadow: 4px 4px 4px #aaa;
+            text-decoration: none;
+            text-transform: none;
+            letter-spacing: 0em;
+            word-spacing: 0em;
+            line-height: 0.9;
+        }
+        #main {
+            margin: 0 auto;
+            width: 700px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #photo a img {
+            
+            /*-moz-border-radius: 20px;
+            border-radius: 20px;*/
+            -moz-box-shadow: 0 0 5px 5px #888;
+            -webkit-box-shadow: 0 0 5px 5px#888;
+            box-shadow: 0 0 5px 5px #888;
+            border: #000 solid 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h1 id="title"></h1>
+        <div id="photo"></div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <script>
+        var randomNum = Math.ceil(Math.random()*2);
+        var flickrApiKey = '802074e4a7efce70a34ac2e985cc928d';
+        var flickrUserId = '19111910%40N00';
+        var flickrApiMethod = 'flickr.photos.search';
+        var flickrTag = 'elcheatum';
+        var url = 'http://api.flickr.com/services/rest/?method='+flickrApiMethod+'&api_key='+flickrApiKey+'&user_id='+flickrUserId+'&tags='+flickrTag+'&format=json&nojsoncallback=1';
+        var html = '';
+        $.getJSON(url, function(rsp) {
+            console.log(rsp);
+            if(rsp.stat == "ok") {
+                var r = Math.ceil(Math.random()*rsp.photos.total);
+                console.log("r# : " + r);
+                try {
+                    var photos = rsp.photos.photo;
+                    var html ='<a href="http://www.flickr.com/photos/joefearnley/'+photos[r].id+'/" title="'+photos[r].title+'"><img src="http://farm'+photos[r].farm+'.static.flickr.com/'+photos[r].server+'/'+photos[r].id+'_'+photos[r].secret+'.jpg" width="375" height="500" alt="El Cheatum"></a>';
+                    $("#title").html(photos[r].title);
+                } catch(e) {
+                    html = "Exception caught: " + e;
+                }
+            } else if(rsp.stat == "fail"){
+                html = "Flickr Error: " + rsp.photos.message;
+            } else {
+                html = 'Unknown error';
+            }
+            console.log("html: " + html);
+            $("#photo").html(html);
+        });
+    </script>
+    <script>
+        var _gaq=[['_setAccount','UA-6368887-9'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+</body>
+</html>
+
