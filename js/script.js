@@ -2,6 +2,7 @@
  * Main javascript file for elcheatum.com
  *
  * @author Joe Fearnley
+ * @date 08.15.2011
  */
 
 $(document).ready(function() {
