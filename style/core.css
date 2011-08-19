@@ -1,0 +1,36 @@
+body {
+    background-color: #eee;
+}
+
+h1 {
+    font-family: 'Covered By Your Grace', serif;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 400;
+    text-shadow: 4px 4px 4px #aaa;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 0.9;
+    margin-top: 30px;
+}
+
+#main {
+    margin: 0 auto;
+    width: 700px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+#photo a img {
+    margin-top: 30px;
+    -moz-box-shadow: 0 0 5px 5px #888;
+    -webkit-box-shadow: 0 0 5px 5px#888;
+    box-shadow: 0 0 5px 5px #888;
+    border: #000 solid 10px;
+}
+
+#generate a {
+    margin-top: 20px;
+}
