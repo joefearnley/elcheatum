@@ -18,70 +18,42 @@
 
   var PhotoList = Backbone.Collection.extend({
     model: Photo,
-    url: 'http://api.flickr.com/services/feeds/photos_public.gne',
+    url: 'http://api.flickr.com/services/feeds/photos_public.gne?tags=elcheatum&tagmode=any&format=json&jsoncallback=?',
     parse: function(response) {
-      //var results = {
-      //  status: response.stat,
-      //  photos: response.photos.photo
-      //};
-      return response;
+      return response.items;
     }
   });
 
   var PhotoView = Backbone.View.extend({
-    el: $('#container'),
-    template: $('#pic-template'),
+    el: $('#photos'),
+    template: $('#photo-template'),
     initialize: function() {
       this.collection = new PhotoList();
 
-      this.loadData();
+      this.render();
     },
 
-    loadData: function() {
+    render: function() {
       var that = this;
       this.collection.fetch({
-        data: {
-          /*
-          method: 'flickr.photos.search',
-          api_key: '802074e4a7efce70a34ac2e985cc928d',
-          tags: 'elcheatum',
-          format: 'json',
-          nojsoncallback: 1
-         */
-          tags: elcheatum,
-          tagmode: any,
-          format=json&jsoncallback=?
-        },
         success: function(results) {
-
-//          var status = results.models[0].attributes.status;
-//          var photos = results.models[0].attributes.photos
-
-          // check status and show error view if encountered.....
-//          if(status == 'fail') {
-//            console.log('API call failed');
-//          } else if(status == 'ok') {
-//            console.log('API call was a success');
-//          }
-
-          //$.each(photos, function(i, photo) {
-          //  console.log('http://farm' + photo.farm + '.static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_b.jpg');
-          //});
-          
-          console.log(results.models);
-          that.render(results.models);
+          $.each(results.models, function(i, photo) {
+            //console.log(photo.toJSON());
+            that.renderPhoto(photo.toJSON());
+          });
         },
         error: function(response) {
+
+          //  Render error view here.
           console.log('collection fetch was a failure');
         }
       });
 
     },
-    render: function(photos) {
-      var html = Mustache.to_html(this.template, photos);
-      $(this.el).html(html);
+    renderPhoto: function(photo) {
+      var html = Mustache.to_html(this.template, photo);
+      $(this.el).append(html);
       return this;
-
     }
   });
 
