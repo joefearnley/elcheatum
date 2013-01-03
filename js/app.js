@@ -8,7 +8,7 @@
   var Photo = Backbone.Model.extend({});
 
   var PhotoList = Backbone.Collection.extend({
-    url: 'http://api.flickr.com/services/feeds/photos_public.gne?tags=elcheatum&tagmode=any&format=json&jsoncallback=?',
+    url: 'http://api.flickr.com/services/feeds/photos_public.gne?id=19111910@N00&tags=elcheatum&format=json&jsoncallback=?',
     parse: function(response) {
       return response.items;
     }
