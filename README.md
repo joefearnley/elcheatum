@@ -1,7 +1,3 @@
 Repository for [elcheatum.com](http://elcheatum.com "El Cheatum") files.
 
-TODO:
- * Convert javascript to backbone
- * remove old css button stuff
- * remove uneeded images
-
+This site utilizes the [supersizedi](https://github.com/buildinternet/supersized) jQuery plugin.
